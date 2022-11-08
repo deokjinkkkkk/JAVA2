@@ -1,5 +1,7 @@
 package com.yedam.java.ch0502_01;
 
+import javax.management.StringValueExp;
+
 public class ReferenceTypeExample {
 		
 	public static void main(String[] args) {
@@ -42,7 +44,44 @@ public class ReferenceTypeExample {
 		//값을 넣기 위해서는 new int[]를 붙인다.
 		//크기를 주면 안된다. ex) new int[5] X
 		int[] scoreList;
+		
 		scoreList = new int[]{83, 90, 87};
 		
+		sum = 0;
+		for(int i=0; i <3 ; i++) {
+			sum = sum + scoreList[i];
+		}
+		System.out.println("총합 : " +sum);
+		
+		sum = add(new int[] {83,90,87});
+		
+		// new 연산자로 배열 생성
+		int [] array = new int[3];
+		for(int i=0; i<3 ; i++) {
+			System.out.println("array["+i+"] : "+array[i]);
+		}
+		
+		String[] strAry = new String[4];
+		for(int i=0; i <strAry.length; i++) {
+			strAry[i] = String.valueOf(i);
+		}
+		
+		for(int i=0; i <strAry.length; i++) {
+			System.out.println("strAry["+i+"] : " + strAry[i]);
+		}
+		
+//		int add(int[] numList) {
+//			sum = 0;
+//			for(int i = 0 ; i < numList.length; i++) {
+//				sum += numList[i];
+//			}
+//			return sum;
+//		}
+		
+	}
+
+	private static int add(int[] is) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

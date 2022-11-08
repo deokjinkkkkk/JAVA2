@@ -5,18 +5,18 @@ public class ConditinalStatementSubject {
 		//문제1) 책 161페이지 5번
 		//for문을 이용해서 다음과 같이 *를 출력하는 코
 		
-		String byul = "";
-		for(int i = 1; i<=5 ;i++) {
-			byul += "*";
-			System.out.println(byul);
-		}
-		
-//		for(int i=1; i<=5; i++) {
-//			for(int j=1; j<=i; j++) {
-//				System.out.println("*");
-//			}
-//			System.out.println();
+//		String byul = "";
+//		for(int i = 1; i<=5 ;i++) {
+//			byul += "*";
+//			System.out.println(byul);
 //		}
+		
+		for(int i=1; i<=5; i++) {
+			for(int j=1; j<=i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
 		
 		// 문제2) for문을 이용해서 1부터 100까지의 정수 중에서
 		// 		 2의 배수가 아닌 숫자의 갯수를 구하세요.
@@ -85,6 +85,34 @@ public class ConditinalStatementSubject {
 			}
 		}
 		System.out.println("주사위를 던진 횟수는 총 " + total + "번 입니다.");
+		
+		//문제 6
+		//   * -> 1번째줄, 공백 3개, 별 1개 => 총 문자 4개
+		// 	** -> 2번째줄, 공백 2개, 별 2개 => 총 문자 4개
+		// *** -> 3번째줄, 공백 1개, 별 3개 => 총 문자 4개
+		//**** -> 4번째줄, 공백 0개, 별 4개 => 총 문자 4개
+		
+		for(int i=1; i<=4; i++) {		// line
+			for(int j = 1; j<=4; j++) {// 문자 수
+				if( j <= (4-i)) {
+					System.out.print(" ");
+				}else {
+					System.out.print("*");
+				}
+			}
+			System.out.println();
+		}
+		//문제 7
+		boolean run = true;
+		int balance = 0;
+		Scanner scanner = new Scanner(System.in);
+		
+		while(run)
+			System.out.println("----------------");
+			System.out.println(" 1.예금 | 2.출금 | 3.잔고 | 4.종료 ");
+			System.out.println("-------------------------------");
+			System.out.print("선택> ");
+			
 		
 		
 	}
