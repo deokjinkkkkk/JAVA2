@@ -5,10 +5,13 @@ import java.util.Scanner;
 public class Exam05 {
 	public static void main(String[] args) {
 		boolean run =true;
+		
 		Scanner sc =new Scanner(System.in);
+		
 		int[] diceList = null;
 		int[] numList = null;
 		int count = 0;
+		
 		while(run) {
 		System.out.println();
 		System.out.println("===1.주사위 크기 2.주사위 굴리기 3.결과 보기 4.가장 많이 나온 수 5.종료 ===");
