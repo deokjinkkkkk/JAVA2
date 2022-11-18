@@ -1,8 +1,10 @@
 package com.seo.app.emp;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.seo.app.admin.AdminID;
 import com.seo.app.common.DAO;
 
 
@@ -55,17 +57,17 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 			connect();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT * FROM Profile WHERE emp_no = " + empVO.getMemberNo();
+			String sql = "SELECT * FROM Profile WHERE Member_num = " + empVO.getMemberNo();
 			rs = stmt.executeQuery(sql);
 			
 			if(rs.next()) {
 				findVO = new EmpVO();
-				empVO.setMemberNo(rs.getInt("Member_num"));
-				empVO.setMemberName(rs.getString("Member_name"));
-				empVO.setGender(rs.getString("gender"));
-				empVO.setMemberAddress(rs.getString("Member_address"));
-				empVO.setMemberBirth(rs.getString("Member_birth"));
-				empVO.setMemberTel(rs.getString("Member_tel"));
+				findVO.setMemberNo(rs.getInt("Member_num"));
+				findVO.setMemberName(rs.getString("Member_name"));
+				findVO.setGender(rs.getString("gender"));
+				findVO.setMemberAddress(rs.getString("Member_address"));
+				findVO.setMemberBirth(rs.getString("Member_birth"));
+				findVO.setMemberTel(rs.getString("Member_tel"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -108,10 +110,11 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 	public void update(EmpVO empVO) {
 		try {
 			connect();
-			String sql ="UPDATE Profile SET Member_address = ? WHERE Member_tel= ?";
+			String sql ="UPDATE Profile SET Member_address = ? , Member_tel = ? WHERE Member_num= ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, empVO.getMemberAddress());
 			pstmt.setString(2, empVO.getMemberTel());
+			pstmt.setInt(3, empVO.getMemberNo());
 			
 			int result = pstmt.executeUpdate();
 			if(result > 0) {
@@ -133,8 +136,10 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 		try {
 			connect();
 			stmt = conn.createStatement();
-			String sql = "DELETE FROM Profile WHERE Memeber_num = " + memberNo;
+			String sql = "DELETE FROM Profile WHERE Member_num = " + memberNo;
+			
 			int result = stmt.executeUpdate(sql);
+			
 			if(result > 0) {
 				System.out.println("정상적으로 삭제되었습니다.");
 			}else {
@@ -190,10 +195,10 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 			
 			if(rs.next()) {
 				findVO = new Member();
-				member.setMemberNum(rs.getInt("Member_num"));
-				member.setMemberName(rs.getString("Member_name"));
-				member.setClassName(rs.getString("class_name"));
-				member.setClassNum(rs.getInt("class_num"));
+				findVO.setMemberNum(rs.getInt("Member_num"));
+				findVO.setMemberName(rs.getString("Member_name"));
+				findVO.setClassName(rs.getString("class_name"));
+				findVO.setClassNum(rs.getInt("class_num"));
 				
 			}
 		}catch(Exception e) {
@@ -208,12 +213,14 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 	public void memInsert(Member member) {
 		try {
 			connect();
-			String sql = "INSERT INTO member VALUES (?,?,?,?,?,?)";
+			String sql = "INSERT INTO member VALUES (?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, member.getMemberNum());
-			pstmt.setString(2, member.getMemberName());
-			pstmt.setString(3, member.getClassName());
-			pstmt.setInt(4, member.getClassNum());
+			pstmt.setString(1, member.getClassName());
+			pstmt.setInt(2, member.getClassNum());
+			
+			pstmt.setInt(3, member.getMemberNum());
+			pstmt.setString(4, member.getMemberName());
+			
 			
 			
 			int result = pstmt.executeUpdate();
@@ -230,28 +237,8 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 		}
 		
 	}
-	//로그인
-	@Override
-	public List<AdminID> login() {
-		List<AdminID> list = new ArrayList<>();
-		try {
-			connect();
-			stmt = conn.createStatement();
-			String sql = "SELECT * FROM class admin WHERE ";
-			rs = stmt.executeQuery(sql);
-			int count = 0;
-			while(rs.next()) {
-				AdminID adminid = new AdminID();
-				
-				
-				list.add(adminid);
-						
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			disconnect();
-		}return list;
-	}
+
+	
+	
 
 }

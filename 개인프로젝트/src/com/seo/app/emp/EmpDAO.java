@@ -2,6 +2,9 @@ package com.seo.app.emp;
 
 import java.util.List;
 
+import com.seo.app.admin.AdminID;
+
+
 
 
 
@@ -9,6 +12,7 @@ import java.util.List;
 
 
 public interface EmpDAO {
+	
 	List<EmpVO> selectAll();
 	List<classList> claSelectAll();
 	
@@ -22,6 +26,6 @@ public interface EmpDAO {
 	
 	void delete(int empNo);
 	
-	List<AdminID> login();
+	
 	
 }

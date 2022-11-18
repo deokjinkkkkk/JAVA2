@@ -1,11 +1,17 @@
 package com.seo.app.common;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+
+import com.seo.app.admin.AdminID;
+import com.seo.app.emp.Member;
 
 public class DAO {
 	private String jdbcDriver = "org.sqlite.JDBC";
@@ -28,6 +34,24 @@ public class DAO {
 			System.out.println("DATABASE CONNECTION FAIL");
 		}
 	}
+	//DB 정보를 가져오는 메소드
+		private void dbConfig() {
+			String resource = "config/db.properties";
+			Properties properties = new Properties();
+			
+			try {
+				String filePath 
+				= ClassLoader.getSystemClassLoader()
+					.getResource(resource)
+					.getPath();
+				properties.load(new FileInputStream(filePath));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			jdbcDriver = properties.getProperty("driver");
+			jdbcUrl = properties.getProperty("url");
+		}
 	
 	public void disconnect() {
 		try {
@@ -39,5 +63,7 @@ public class DAO {
 		 System.out.println("정상적으로 자원히 해제 되지 않았습니다.");
 		}
 	}
+
+
 }
 

@@ -1,5 +1,10 @@
 package com.seo.app;
 
-public class main {
+import com.seo.app.admin.Login;
 
+public class main {
+	public static void main(String[] args) {
+		new Login();
+	}
+	
 }
