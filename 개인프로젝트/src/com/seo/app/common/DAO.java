@@ -17,7 +17,7 @@ import com.seo.app.enrolment.Member;
 
 public class DAO {
 	private String jdbcDriver = "org.sqlite.JDBC";
-	private String jdbcUrl = "jdbc:sqlite:/D:/dev/database/서덕진.db";
+	private String jdbcUrl = "jdbc:sqlite:/C:/Users/82102/Desktop/서덕진.db";
 	
 	protected Connection conn;
 	protected Statement stmt;

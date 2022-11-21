@@ -3,8 +3,10 @@ package homework221111;
 public class ObesityInfo extends StandardWeightInfo{
 	double obesity;
 	
-	public ObesityInfo(String name, int height, int weight) {
+	
+	public ObesityInfo(String name, int height, int weight ) {
 		super(name,height,weight);
+		
 	}
 	@Override
 	public void getinformation() {
@@ -21,13 +23,12 @@ public class ObesityInfo extends StandardWeightInfo{
 		}else if (obesity < 35) {
 			System.out.println(", 고도비만");
 		}else if (obesity >35) {
-			System.out.println(", 초고도비만");
+			System.out.print(", 초고도비만");
 		}
 	}
 
 	public double getObesity() {
 		obesity = (weight - standardweight)/standardweight * 100;
-		System.out.println("비만도 :" + obesity);
 		return obesity;
 		
 	}

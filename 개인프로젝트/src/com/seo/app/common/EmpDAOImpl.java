@@ -161,7 +161,7 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 		}
 
 	}
-	//수강목록 조회
+	//개강목록 조회
 	@Override
 	public List<classList> claSelectAll() {
 		List<classList> list = new ArrayList<>();
@@ -195,25 +195,41 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 	
 	@Override
 	public List<Member> memSelectOne(Member member) {
-		Member findVO = null;
+		
 		List<Member> list = new ArrayList<>();
 		try {
 			connect();
-			stmt = conn.createStatement();
 			
-			String sql = "SELECT * FROM member WHERE member_num = " + member.getMemberSnum();
-			rs = stmt.executeQuery(sql);
 			
+			String sql = "SELECT ME.class_snum, "
+						+"ME.Member_num, "
+						+"ME.class_num, "
+						+"PR.Member_name, "
+						+"CL.class_name, "
+						+"CL.class_credit "
+						+"FROM member ME "
+						+"JOIN profile PR "
+						+"ON ME.Member_num = PR.Member_num "
+						+"JOIN class CL "
+						+"ON ME.class_num = CL.class_num";
+						
+					 	
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				findVO.setMemberName(rs.getString("class_name"));
-				findVO.setMemberNum(rs.getInt("class_num"));
-				findVO.setMemberFromdate(rs.getString("class_fromdate"));
-				findVO.setMemberTodate(rs.getString("class_todate"));
-				findVO.setMemberProfessor(rs.getString("class_professor"));
-				findVO.setMemberCredit(rs.getInt("class_credit"));
-				findVO.setMemberSnum(rs.getInt("class_snum"));
+				Member findVO = new Member();
+				findVO.setMemberNum(rs.getInt("Member_num"));
+				findVO.setClassNum(rs.getInt("class_num"));
+				findVO.setClassSnum(rs.getInt("class_snum"));
+				findVO.setClassName(rs.getString("class_name"));
+				findVO.setClassCredit(rs.getInt("class_credit"));
+				findVO.setMemberName(rs.getString("Member_name"));
+				
 				
 				list.add(findVO);
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -227,15 +243,12 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 	public void Enrolment(Member member) {
 		try {
 			connect();
-			String sql = "INSERT INTO member VALUES (?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO member VALUES (?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getMemberName());
+		
+			pstmt.setInt(1, member.getClassNum());
 			pstmt.setInt(2, member.getMemberNum());
-			pstmt.setString(3, member.getMemberFromdate());
-			pstmt.setString(4, member.getMemberTodate());
-			pstmt.setString(5, member.getMemberProfessor());
-			pstmt.setInt(6, member.getMemberCredit());
-			pstmt.setInt(7, member.getMemberSnum());
+			
 			
 			
 			

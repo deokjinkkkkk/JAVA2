@@ -1,6 +1,6 @@
 package homework221111;
 
-public class Human {
+public abstract class Human {
 	String name;
 	int height; 
 	int weight;
@@ -11,6 +11,10 @@ public class Human {
 		this.weight = weight;
 	}
 	public void getinformation() {
-		System.out.println(name + " 님의 신장 " +height +", 몸무게" + weight);
+		System.out.print(name + " 님의 신장 " +height +", 몸무게 " + weight);
 	}
+	protected abstract double getStandardWeight();
+	protected abstract double getObesity();
+	
+	
 }

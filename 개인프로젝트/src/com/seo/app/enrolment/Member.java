@@ -1,60 +1,65 @@
 package com.seo.app.enrolment;
 
 public class Member {
-	private String memberName;
+	private int classNum;
 	private int memberNum;
-	private String memberFromdate;
-	private String memberTodate;
-	private String memberProfessor;
-	private int memberCredit;
-	private int memberSnum;
+	private int classCredit;
+	private int classSnum;
+	private String className;
+	private String memberName;
+
+	public int getClassCredit() {
+		return classCredit;
+	}
+
+	public void setClassCredit(int classCredit) {
+		this.classCredit = classCredit;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
 	public String getMemberName() {
 		return memberName;
 	}
+
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
+
+	public int getClassNum() {
+		return classNum;
+	}
+
+	public void setClassNum(int classNum) {
+		this.classNum = classNum;
+	}
+
 	public int getMemberNum() {
 		return memberNum;
 	}
+
 	public void setMemberNum(int memberNum) {
 		this.memberNum = memberNum;
 	}
-	public String getMemberFromdate() {
-		return memberFromdate;
+
+	public int getClassSnum() {
+		return classSnum;
 	}
-	public void setMemberFromdate(String memberFromdate) {
-		this.memberFromdate = memberFromdate;
+
+	public void setClassSnum(int classSnum) {
+		this.classSnum = classSnum;
 	}
-	public String getMemberTodate() {
-		return memberTodate;
-	}
-	public void setMemberTodate(String memberTodate) {
-		this.memberTodate = memberTodate;
-	}
-	public String getMemberProfessor() {
-		return memberProfessor;
-	}
-	public void setMemberProfessor(String memberProfessor) {
-		this.memberProfessor = memberProfessor;
-	}
-	public int getMemberCredit() {
-		return memberCredit;
-	}
-	public void setMemberCredit(int memberCredit) {
-		this.memberCredit = memberCredit;
-	}
-	public int getMemberSnum() {
-		return memberSnum;
-	}
-	public void setMemberSnum(int memberSnum) {
-		this.memberSnum = memberSnum;
-	}
+
 	@Override
 	public String toString() {
-		return "Member [memberName=" + memberName + ", memberNum=" + memberNum + ", memberFromdate=" + memberFromdate
-				+ ", memberTodate=" + memberTodate + ", memberProfessor=" + memberProfessor + ", memberCredit="
-				+ memberCredit + ", memberSnum=" + memberSnum + "]";
+		return "Member [classNum=" + classNum + ", memberNum=" + memberNum + ", classCredit=" + classCredit
+				+ ", classSnum=" + classSnum + ", className=" + className + ", memberName=" + memberName + "]";
 	}
-	
+
 }

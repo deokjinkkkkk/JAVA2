@@ -63,7 +63,7 @@ public class EnrolmentManagement {
 			return;
 		}
 		for(classList classlist : list) {
-			System.out.printf("과목번호 %d: 과목명 : %s, 수강시작 : %s, 수강종료 : %s, 담당교수 : %s, 학점 : %s \n",
+			System.out.printf("과목번호 : %d 과목명 : %s 수강시작 : %s 수강종료 : %s 담당교수 : %s 학점 : %d \n",
 								classlist.getClassNum(),classlist.getClassName(),classlist.getClassFromdate(),classlist.getClassTodate(),classlist.getClassProfessor(),classlist.getClassCredit());
 		}
 	}
@@ -78,15 +78,15 @@ public class EnrolmentManagement {
 		}
 		
 		for(Member classlist : list) {
-			System.out.printf("과목번호 %d: 과목명 : %s, 수강시작 : %s, 수강종료 : %s, 담당교수 : %s, 학점 : %s \n",
-					classlist.getMemberNum(),classlist.getMemberName(),classlist.getMemberFromdate(),classlist.getMemberTodate(),classlist.getMemberProfessor(),classlist.getMemberCredit());
+			System.out.printf("강의번호 : %d 과목명 : %s 학점 : %d \n",
+					classlist.getClassNum(),classlist.getClassName(),classlist.getClassCredit());
 		}
 		
 	}
 	private Member inputmemInfo() {
 		Member member = new Member();
 		System.out.println("학생번호");
-		member.setMemberSnum(Integer.parseInt(sc.nextLine()));
+		member.setMemberNum(Integer.parseInt(sc.nextLine()));
 		return member;
 		
 	}
@@ -99,7 +99,9 @@ public class EnrolmentManagement {
 	private Member inputMemAll() {
 		Member member = new Member();
 		System.out.println("학생번호 > ");
-		member.setMemberSnum(Integer.parseInt(sc.nextLine()));
+		member.setMemberNum(Integer.parseInt(sc.nextLine()));
+		System.out.println("과목번호 > ");
+		member.setClassNum(Integer.parseInt(sc.nextLine()));
 		return member;
 	}
 	//수강신청 메뉴선택
