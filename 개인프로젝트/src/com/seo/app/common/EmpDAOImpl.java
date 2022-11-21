@@ -1,11 +1,13 @@
-package com.seo.app.emp;
+package com.seo.app.common;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.seo.app.admin.AdminID;
-import com.seo.app.common.DAO;
+import com.seo.app.enrolment.EmpVO;
+import com.seo.app.enrolment.Member;
+import com.seo.app.enrolment.classList;
 
 
 public class EmpDAOImpl extends DAO implements EmpDAO {
@@ -51,16 +53,20 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 	//특정회원조회
 	
 	@Override
-	public EmpVO selectOne(EmpVO empVO) {
+	public List<EmpVO> selectOne(EmpVO empVO) {
 		EmpVO findVO = null;
+		List<EmpVO> list = new ArrayList<>();
 		try {
 			connect();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT * FROM Profile WHERE Member_num = " + empVO.getMemberNo();
+			String sql = "SELECT * FROM Profile WHERE Member_name= '" + empVO.getMemberName() + "'";
+			
+			
 			rs = stmt.executeQuery(sql);
 			
-			if(rs.next()) {
+			while(rs.next()) {
+				
 				findVO = new EmpVO();
 				findVO.setMemberNo(rs.getInt("Member_num"));
 				findVO.setMemberName(rs.getString("Member_name"));
@@ -68,13 +74,15 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 				findVO.setMemberAddress(rs.getString("Member_address"));
 				findVO.setMemberBirth(rs.getString("Member_birth"));
 				findVO.setMemberTel(rs.getString("Member_tel"));
+				
+				list.add(findVO);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			disconnect();
 		}
-		return findVO;
+		return list;
 		
 	}
 	//회원등록
@@ -170,6 +178,7 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 				classlist.setClassFromdate(rs.getString("class_fromdate"));
 				classlist.setClassTodate(rs.getString("class_todate"));
 				classlist.setClassProfessor(rs.getString("class_professor"));
+				classlist.setClassCredit(rs.getInt("class_credit"));
 				
 				
 				list.add(classlist);
@@ -183,43 +192,51 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 		}return list;
 	}
 	//수강조회
+	
 	@Override
-	public Member memSelectOne(Member member) {
+	public List<Member> memSelectOne(Member member) {
 		Member findVO = null;
+		List<Member> list = new ArrayList<>();
 		try {
 			connect();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT * FROM member WHERE member_num = " + member.getMemberNum();
+			String sql = "SELECT * FROM member WHERE member_num = " + member.getMemberSnum();
 			rs = stmt.executeQuery(sql);
 			
-			if(rs.next()) {
-				findVO = new Member();
-				findVO.setMemberNum(rs.getInt("Member_num"));
-				findVO.setMemberName(rs.getString("Member_name"));
-				findVO.setClassName(rs.getString("class_name"));
-				findVO.setClassNum(rs.getInt("class_num"));
+			while(rs.next()) {
+				findVO.setMemberName(rs.getString("class_name"));
+				findVO.setMemberNum(rs.getInt("class_num"));
+				findVO.setMemberFromdate(rs.getString("class_fromdate"));
+				findVO.setMemberTodate(rs.getString("class_todate"));
+				findVO.setMemberProfessor(rs.getString("class_professor"));
+				findVO.setMemberCredit(rs.getInt("class_credit"));
+				findVO.setMemberSnum(rs.getInt("class_snum"));
 				
+				list.add(findVO);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			disconnect();
 		}
-		return findVO;
+		return list;
 	}
 	//수강신청
 	@Override
-	public void memInsert(Member member) {
+	public void Enrolment(Member member) {
 		try {
 			connect();
-			String sql = "INSERT INTO member VALUES (?,?,?,?)";
+			String sql = "INSERT INTO member VALUES (?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getClassName());
-			pstmt.setInt(2, member.getClassNum());
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setInt(2, member.getMemberNum());
+			pstmt.setString(3, member.getMemberFromdate());
+			pstmt.setString(4, member.getMemberTodate());
+			pstmt.setString(5, member.getMemberProfessor());
+			pstmt.setInt(6, member.getMemberCredit());
+			pstmt.setInt(7, member.getMemberSnum());
 			
-			pstmt.setInt(3, member.getMemberNum());
-			pstmt.setString(4, member.getMemberName());
 			
 			
 			
@@ -237,6 +254,10 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 		}
 		
 	}
+
+	
+
+	
 
 	
 	

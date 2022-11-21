@@ -2,7 +2,7 @@ package com.seo.app.admin;
 
 import java.util.Scanner;
 
-import com.seo.app.emp.GM;
+import com.seo.app.enrolment.EnrolmentManagement;
 
 
 public class Login {
@@ -26,7 +26,7 @@ public class Login {
 			
 		}else if(menuNo == 2){
 			//수강신청
-			Enrolment();
+			new EnrolmentManagement();
 		}else if(menuNo == 3) {
 			//종료
 			end();
@@ -37,10 +37,7 @@ public class Login {
 		}
 	}
 }
-	private void Enrolment() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	private void login() {
 		AdminID inputInfo = inputadminId();
 		loginInfo = adminIDDAO.getInstance().selectOne(inputInfo);

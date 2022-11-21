@@ -17,21 +17,25 @@ public class adminIDDAO extends DAO {
 			AdminID loginInfo = null;
 			try {
 				connect();
+				//로그인 아이디 입력
 				String sql = "SELECT * FROM admin WHERE ID = '" + adminId.getId() +"'" ;
 				stmt = conn.createStatement();
 				rs = stmt.executeQuery(sql);
 				
 				if(rs.next()) {
+					//비밀번호가 일치하는 경우
 					if(rs.getString("password").equals(adminId.getPassword())){
 						loginInfo = new AdminID();
 						loginInfo.setId(rs.getString("ID"));
 						loginInfo.setPassword(rs.getString("password"));
-						loginInfo.setRole(rs.getInt("role"));
+						
 				}else  {
+					//비밀번호가 일치하지 않을경우
 					System.out.println("비밀번호가 일치하지 않습니다."); 
 				}
 				
 				}else {
+					//아이디가 존재하지 않을경우
 					System.out.println("아이디가 존재하지 않습니다.");
 				}
 		}catch(SQLException e){

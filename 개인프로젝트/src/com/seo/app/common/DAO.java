@@ -8,10 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Properties;
 
 import com.seo.app.admin.AdminID;
-import com.seo.app.emp.Member;
+import com.seo.app.enrolment.Member;
+
 
 public class DAO {
 	private String jdbcDriver = "org.sqlite.JDBC";
@@ -63,6 +65,7 @@ public class DAO {
 		 System.out.println("정상적으로 자원히 해제 되지 않았습니다.");
 		}
 	}
+	
 
 
 }

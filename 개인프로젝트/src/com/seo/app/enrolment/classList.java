@@ -1,4 +1,4 @@
-package com.seo.app.emp;
+package com.seo.app.enrolment;
 
 public class classList {
 	private String className;
@@ -6,7 +6,16 @@ public class classList {
 	private String classFromdate;
 	private String classTodate;
 	private String classProfessor;
+	private int classCredit;
 	
+	public int getClassCredit() {
+		return classCredit;
+	}
+
+	public void setClassCredit(int classCredit) {
+		this.classCredit = classCredit;
+	}
+
 	public String getClassName() {
 		return className;
 	}
@@ -42,7 +51,8 @@ public class classList {
 	@Override
 	public String toString() {
 		return "classList [className=" + className + ", classNum=" + classNum + ", classFromdate=" + classFromdate
-				+ ", classTodate=" + classTodate + ", classProfessor=" + classProfessor + "]";
+				+ ", classTodate=" + classTodate + ", classProfessor=" + classProfessor + ", classCredit=" + classCredit
+				+ "]";
 	}
 	
 	

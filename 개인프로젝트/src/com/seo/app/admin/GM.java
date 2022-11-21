@@ -1,7 +1,12 @@
-package com.seo.app.emp;
+package com.seo.app.admin;
 
 import java.util.List;
 import java.util.Scanner;
+
+import com.seo.app.common.EmpDAO;
+import com.seo.app.common.EmpDAOImpl;
+import com.seo.app.enrolment.EmpVO;
+import com.seo.app.enrolment.classList;
 
 public class GM {
 	protected Scanner sc = new Scanner(System.in);
@@ -63,21 +68,25 @@ public class GM {
 	//특정회원조회
 		//회원이름으로 조회가능하도록 해야함
 		private void SelectOne() {
-			EmpVO findEmp = inputEmpInfo();
-			EmpVO empVO =empDAO.selectOne(findEmp);
-			if(empVO == null) {
-				System.out.printf("%d 사원은 존재하지 않습니다. \n ", findEmp.getMemberNo() );
-			}else {
-				System.out.println("검색결과 > ");
-				System.out.println(empVO);
+			EmpVO findmem = inputEmpInfo();
+			List<EmpVO> list = empDAO.selectOne(findmem);
+			
+			if(list.isEmpty()) {
+				System.out.println("정보가 존재하지 않습니다.");
+				return;
+			}
+			
+			for(EmpVO empVO : list) {
+				System.out.printf("%s: %s, %s, %s, %s \n",empVO.getMemberName(),empVO.getGender(),
+									empVO.getMemberBirth(),empVO.getMemberAddress(),empVO.getMemberTel());
 			}
 			
 		}
 		
 		private EmpVO inputEmpInfo() {
 			EmpVO empVO = new EmpVO();
-			System.out.println("회원번호 > ");
-			empVO.setMemberNo(Integer.parseInt(sc.nextLine()));
+			System.out.println("회원이름 > ");
+			empVO.setMemberName(sc.nextLine());
 			return empVO;
 		}
 		
