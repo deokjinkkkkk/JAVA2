@@ -4,7 +4,7 @@ public class AdminID {
 	
 	private String id;
 	private String password;
-	private int role;
+	
 	
 	
 	
@@ -32,28 +32,15 @@ public class AdminID {
 
 
 
-	public int getRole() {
-		return role;
-	}
-
-
-
-	public void setRole(int role) {
-		this.role = role;
-	}
-
-
-
 	@Override
 	public String toString() {
-		String info = "";
-		
-		if(role == 0) {
-			info = "관리자 계정 : " + id;
-		}else {
-			info = "일반 계정 : " + id;
-		}
-		
-		return info;
+		return "AdminID [id=" + id + ", password=" + password + "]";
 	}
+
+
+
+	
+
+
+	
 }

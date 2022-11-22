@@ -78,7 +78,7 @@ public class EnrolmentManagement {
 		}
 		
 		for(Member classlist : list) {
-			System.out.printf("강의번호 : %d 과목명 : %s 학점 : %d \n",
+			System.out.printf("과목번호 : %d 과목명 : %s 학점 : %d \n",
 					classlist.getClassNum(),classlist.getClassName(),classlist.getClassCredit());
 		}
 		

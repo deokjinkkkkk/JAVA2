@@ -5,10 +5,9 @@ import java.util.Scanner;
 
 import com.seo.app.common.EmpDAO;
 import com.seo.app.common.EmpDAOImpl;
-import com.seo.app.enrolment.EmpVO;
 import com.seo.app.enrolment.classList;
 
-public class GM {
+public class Admin {
 	protected Scanner sc = new Scanner(System.in);
 	EmpDAO empDAO = EmpDAOImpl.getInstance();
 	
@@ -77,7 +76,7 @@ public class GM {
 			}
 			
 			for(EmpVO empVO : list) {
-				System.out.printf("%s: %s, %s, %s, %s \n",empVO.getMemberName(),empVO.getGender(),
+				System.out.printf("회원이름 : %s 성별 : %s, 생년월일 : %s, 주소 : %s, 전화번호 : %s \n",empVO.getMemberName(),empVO.getGender(),
 									empVO.getMemberBirth(),empVO.getMemberAddress(),empVO.getMemberTel());
 			}
 			
@@ -99,7 +98,7 @@ public class GM {
 				return;
 			}
 			for(EmpVO empVO : list) {
-				System.out.printf("%s: %s, %s, %s, %s \n",empVO.getMemberName(),empVO.getGender(),
+				System.out.printf("회원번호 : %d 회원명 : %s 성별 : %s, 생년월일 : %s, 주소 : %s, 전화번호 : %s \n",empVO.getMemberNo(),empVO.getMemberName(),empVO.getGender(),
 									empVO.getMemberBirth(),empVO.getMemberAddress(),empVO.getMemberTel());
 			}
 			

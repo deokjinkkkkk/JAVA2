@@ -38,13 +38,15 @@ public class Login {
 	}
 }
 	
+	//로그인에 성공할시 Admin 클래스로 넘어간다.
 	private void login() {
 		AdminID inputInfo = inputadminId();
 		loginInfo = adminIDDAO.getInstance().selectOne(inputInfo);
 		if(loginInfo == null)return;
-		new GM().admin();		
+		new Admin().admin();		
 		
 	}
+		//아이디와 비밀번호 임력
 		private AdminID inputadminId() {
 		AdminID info = new AdminID();
 		System.out.println("아이디 > ");

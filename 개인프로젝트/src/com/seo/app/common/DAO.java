@@ -16,8 +16,9 @@ import com.seo.app.enrolment.Member;
 
 
 public class DAO {
+	//DB에 연결한다.
 	private String jdbcDriver = "org.sqlite.JDBC";
-	private String jdbcUrl = "jdbc:sqlite:/C:/Users/82102/Desktop/서덕진.db";
+	private String jdbcUrl = "jdbc:sqlite:/C:/Users/admin/Desktop/Project/서덕진.db";
 	
 	protected Connection conn;
 	protected Statement stmt;
@@ -36,25 +37,7 @@ public class DAO {
 			System.out.println("DATABASE CONNECTION FAIL");
 		}
 	}
-	//DB 정보를 가져오는 메소드
-		private void dbConfig() {
-			String resource = "config/db.properties";
-			Properties properties = new Properties();
-			
-			try {
-				String filePath 
-				= ClassLoader.getSystemClassLoader()
-					.getResource(resource)
-					.getPath();
-				properties.load(new FileInputStream(filePath));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			jdbcDriver = properties.getProperty("driver");
-			jdbcUrl = properties.getProperty("url");
-		}
-	
+	//DB와 연결을 끊어준다.
 	public void disconnect() {
 		try {
 			if(rs != null) rs.close();
@@ -65,6 +48,7 @@ public class DAO {
 		 System.out.println("정상적으로 자원히 해제 되지 않았습니다.");
 		}
 	}
+	
 	
 
 

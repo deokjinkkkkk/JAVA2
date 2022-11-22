@@ -1,4 +1,4 @@
-package com.seo.app.enrolment;
+package com.seo.app.admin;
 
 public class EmpVO {
 	private int memberNo;

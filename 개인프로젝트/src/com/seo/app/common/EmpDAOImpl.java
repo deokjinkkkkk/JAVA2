@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.seo.app.admin.AdminID;
-import com.seo.app.enrolment.EmpVO;
+import com.seo.app.admin.EmpVO;
 import com.seo.app.enrolment.Member;
 import com.seo.app.enrolment.classList;
 
@@ -180,7 +180,6 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 				classlist.setClassProfessor(rs.getString("class_professor"));
 				classlist.setClassCredit(rs.getInt("class_credit"));
 				
-				
 				list.add(classlist);
 				
 				if(++count >= 20) break;
@@ -200,8 +199,8 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 		try {
 			connect();
 			
-			
-			String sql = "SELECT ME.class_snum, "
+			//JOIN을 사용하여 class 테이블과 Profile 테이블의 내용을 가지고 온다.
+			String sql = "SELECT "
 						+"ME.Member_num, "
 						+"ME.class_num, "
 						+"PR.Member_name, "
@@ -211,22 +210,20 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 						+"JOIN profile PR "
 						+"ON ME.Member_num = PR.Member_num "
 						+"JOIN class CL "
-						+"ON ME.class_num = CL.class_num";
-						
-					 	
+						+"ON ME.class_num = CL.class_num "
+						+"WHERE ME.Member_num = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			
+			pstmt.setInt(1, member.getMemberNum()); //WHERE 에 넣어줄 Member_num을 가져온다.
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				Member findVO = new Member();
 				findVO.setMemberNum(rs.getInt("Member_num"));
 				findVO.setClassNum(rs.getInt("class_num"));
-				findVO.setClassSnum(rs.getInt("class_snum"));
 				findVO.setClassName(rs.getString("class_name"));
 				findVO.setClassCredit(rs.getInt("class_credit"));
 				findVO.setMemberName(rs.getString("Member_name"));
-				
 				
 				list.add(findVO);
 				
@@ -243,15 +240,11 @@ public class EmpDAOImpl extends DAO implements EmpDAO {
 	public void Enrolment(Member member) {
 		try {
 			connect();
-			String sql = "INSERT INTO member VALUES (?,?,?)";
+			String sql = "INSERT INTO member VALUES (?,?)";
 			pstmt = conn.prepareStatement(sql);
 		
 			pstmt.setInt(1, member.getClassNum());
 			pstmt.setInt(2, member.getMemberNum());
-			
-			
-			
-			
 			
 			int result = pstmt.executeUpdate();
 			

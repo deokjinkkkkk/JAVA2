@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import com.seo.app.common.DAO;
 
 public class adminIDDAO extends DAO {
+		//싱글톤 : 객체의 인스턴스가 1개만 생성되도록함
 		private static adminIDDAO dao = null;
 		private adminIDDAO() {}
 		public static adminIDDAO getInstance() {

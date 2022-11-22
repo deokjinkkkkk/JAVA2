@@ -4,7 +4,6 @@ public class Member {
 	private int classNum;
 	private int memberNum;
 	private int classCredit;
-	private int classSnum;
 	private String className;
 	private String memberName;
 
@@ -48,18 +47,16 @@ public class Member {
 		this.memberNum = memberNum;
 	}
 
-	public int getClassSnum() {
-		return classSnum;
-	}
-
-	public void setClassSnum(int classSnum) {
-		this.classSnum = classSnum;
-	}
-
 	@Override
 	public String toString() {
 		return "Member [classNum=" + classNum + ", memberNum=" + memberNum + ", classCredit=" + classCredit
-				+ ", classSnum=" + classSnum + ", className=" + className + ", memberName=" + memberName + "]";
+				+ ", className=" + className + ", memberName=" + memberName + "]";
 	}
+
+	
+
+	
+
+	
 
 }
